@@ -164,14 +164,16 @@
   .cat-group   .icon-wrap { background: #dcfce7; }
   .cat-class   .icon-wrap { background: #fef3c7; }
   .cat-admin   .icon-wrap { background: #ffe4e6; }
-  .cat-event   .icon-wrap { background: #d1fae5; }
+  .cat-event    .icon-wrap { background: #d1fae5; }
+  .cat-facility .icon-wrap { background: #e0f2fe; }
 
-  .tag-timer   { background: #dff0ff; color: #1e60a8; }
-  .tag-lottery { background: #ede9fe; color: #5b21b6; }
-  .tag-group   { background: #dcfce7; color: #166534; }
-  .tag-class   { background: #fef3c7; color: #92400e; }
-  .tag-admin   { background: #ffe4e6; color: #9f1239; }
-  .tag-event   { background: #d1fae5; color: #065f46; }
+  .tag-timer    { background: #dff0ff; color: #1e60a8; }
+  .tag-lottery  { background: #ede9fe; color: #5b21b6; }
+  .tag-group    { background: #dcfce7; color: #166534; }
+  .tag-class    { background: #fef3c7; color: #92400e; }
+  .tag-admin    { background: #ffe4e6; color: #9f1239; }
+  .tag-event    { background: #d1fae5; color: #065f46; }
+  .tag-facility { background: #e0f2fe; color: #0369a1; }
 
   /* ── Hidden ── */
   .card.hidden { display: none; }
@@ -204,12 +206,28 @@
   <!-- Filter -->
   <div class="filter-bar">
     <button class="filter-btn active" data-filter="all">すべて</button>
+    <button class="filter-btn" data-filter="facility">🏫 施設管理</button>
     <button class="filter-btn" data-filter="timer">⏱ タイマー</button>
     <button class="filter-btn" data-filter="lottery">🎲 抽選</button>
     <button class="filter-btn" data-filter="group">👥 グルーピング</button>
     <button class="filter-btn" data-filter="class">📚 授業</button>
     <button class="filter-btn" data-filter="admin">📋 校務</button>
     <button class="filter-btn" data-filter="event">🏃 校外学習</button>
+  </div>
+
+  <!-- 施設管理 -->
+  <div class="section-block" data-section="facility">
+    <div class="section-label">施設管理</div>
+    <div class="grid">
+      <a class="card cat-facility" data-cat="facility" href="https://kou-no1.github.io/room_booking/" target="_blank">
+        <div class="card-top">
+          <div class="icon-wrap">🏫</div>
+          <span class="tag tag-facility">施設管理</span>
+        </div>
+        <div class="card-title">特別教室予約システム</div>
+        <div class="card-desc">優先・予約クラスを一覧管理</div>
+      </a>
+    </div>
   </div>
 
   <!-- タイマー -->
@@ -441,5 +459,4 @@
 </script>
 
 </body>
- <footer style="border-top: 0.5px solid #e0e0e0; padding: 1.5rem 0 1rem; text-align: center;"> <p style="font-size: 15px; color: #888; margin: 0 0 4px;">「あったらいいのに」を、作ってる。</p> <p style="font-size: 12px; color: #aaa; margin: 0;">© 2026 野村晃一 All rights reserved.</p> </footer> 
 </html>
