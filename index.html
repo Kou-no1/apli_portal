@@ -181,6 +181,66 @@
   .card.hidden { display: none; }
   .section-block.hidden { display: none; }
 
+  /* ── Sub section ── */
+  .sub-section { margin-top: 1rem; }
+  .sub-section-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    padding-left: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sub-section-label::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 12px;
+    background: #fbbf24;
+    border-radius: 2px;
+  }
+  .grade-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .grade-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .grade-btn:hover {
+    border-color: #fbbf24;
+    box-shadow: 0 2px 8px rgba(251,191,36,0.2);
+    transform: translateY(-1px);
+  }
+  .grade-btn .grade-num {
+    width: 22px;
+    height: 22px;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
   /* ── Footer ── */
   .footer {
     text-align: center;
@@ -362,6 +422,19 @@
         <div class="card-desc">鉄棒・マット運動などの技能を段階的にナビゲート</div>
       </a>
     </div>
+
+    <!-- 小カテゴリ：算数アタック問題 -->
+    <div class="sub-section">
+      <div class="sub-section-label">算数アタック問題 — 習熟度別で学力の向上・定着を図る</div>
+      <div class="grade-grid">
+        <a class="grade-btn" href="https://kou-no1.github.io/math-portal-01/" target="_blank"><span class="grade-num">1</span>1年生</a>
+        <a class="grade-btn" href="https://kou-no1.github.io/math-portal-02/" target="_blank"><span class="grade-num">2</span>2年生</a>
+        <a class="grade-btn" href="https://kou-no1.github.io/math-portal-03/" target="_blank"><span class="grade-num">3</span>3年生</a>
+        <a class="grade-btn" href="https://kou-no1.github.io/math-portal-04/" target="_blank"><span class="grade-num">4</span>4年生</a>
+        <a class="grade-btn" href="https://kou-no1.github.io/math-portal-05/" target="_blank"><span class="grade-num">5</span>5年生</a>
+        <a class="grade-btn" href="https://kou-no1.github.io/math-portal-06/" target="_blank"><span class="grade-num">6</span>6年生</a>
+      </div>
+    </div>
   </div>
 
   <!-- 校外学習 -->
@@ -493,5 +566,4 @@
 </script>
 
 </body>
- <footer style="border-top: 0.5px solid #e0e0e0; padding: 1.5rem 0 1rem; text-align: center;"> <p style="font-size: 15px; color: #888; margin: 0 0 4px;">「あったらいいのに」を、作ってる。</p> <p style="font-size: 12px; color: #aaa; margin: 0;">© 2026 野村晃一 All rights reserved.</p> </footer> 
 </html>
