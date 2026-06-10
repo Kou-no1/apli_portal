@@ -167,6 +167,7 @@
   .cat-event    .icon-wrap { background: #d1fae5; }
   .cat-facility  .icon-wrap { background: #e0f2fe; }
   .cat-homeroom  .icon-wrap { background: #fce7f3; }
+  .cat-teacher   .icon-wrap { background: #f0fdf4; }
 
   .tag-timer    { background: #dff0ff; color: #1e60a8; }
   .tag-lottery  { background: #ede9fe; color: #5b21b6; }
@@ -176,6 +177,7 @@
   .tag-event    { background: #d1fae5; color: #065f46; }
   .tag-facility { background: #e0f2fe; color: #0369a1; }
   .tag-homeroom { background: #fce7f3; color: #9d174d; }
+  .tag-teacher  { background: #f0fdf4; color: #166534; }
 
   /* ── Hidden ── */
   .card.hidden { display: none; }
@@ -268,8 +270,9 @@
   <!-- Filter -->
   <div class="filter-bar">
     <button class="filter-btn active" data-filter="all">すべて</button>
-    <button class="filter-btn" data-filter="homeroom">🐉 学級経営</button>
     <button class="filter-btn" data-filter="facility">🏫 施設管理</button>
+    <button class="filter-btn" data-filter="homeroom">🐉 学級経営</button>
+    <button class="filter-btn" data-filter="teacher">🌱 教師力向上</button>
     <button class="filter-btn" data-filter="timer">⏱ タイマー</button>
     <button class="filter-btn" data-filter="lottery">🎲 抽選</button>
     <button class="filter-btn" data-filter="class">📚 授業</button>
@@ -319,6 +322,21 @@
         </div>
         <div class="card-title">席替えアプリ</div>
         <div class="card-desc">NGペア・固定席・エリア指定・シークレットモード搭載。A4印刷対応</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 教師力向上 -->
+  <div class="section-block" data-section="teacher">
+    <div class="section-label">教師力向上</div>
+    <div class="grid">
+      <a class="card cat-teacher" data-cat="teacher" href="https://kou-no1.github.io/teacherchi/" target="_blank">
+        <div class="card-top">
+          <div class="icon-wrap">🌱</div>
+          <span class="tag tag-teacher">教師力向上</span>
+        </div>
+        <div class="card-title">せんせいっち</div>
+        <div class="card-desc">毎日のミッションを達成し、PDCAを回してキャラクターを育てよう</div>
       </a>
     </div>
   </div>
@@ -566,4 +584,5 @@
 </script>
 
 </body>
+ <footer style="border-top: 0.5px solid #e0e0e0; padding: 1.5rem 0 1rem; text-align: center;"> <p style="font-size: 15px; color: #888; margin: 0 0 4px;">「あったらいいのに」を、作ってる。</p> <p style="font-size: 12px; color: #aaa; margin: 0;">© 2026 野村晃一 All rights reserved.</p> </footer> 
 </html>
