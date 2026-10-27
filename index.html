@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>先生のためのアプリ集</title>
+<title>まなびたね｜先生の実践ナビ</title>
+<meta name="description" content="先生の困りごとから、活動・声かけ・授業アプリを探せる実践ポータル。話の聞き方、切り替え、朝の会・給食・帰りの会、関係づくりを支えます。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -282,19 +283,192 @@
     .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
     .filter-btn { font-size: 12px; padding: 5px 12px; }
   }
+  /* 実践ナビ：既存のアプリ一覧を生かした共通の入口 */
+  :root { --bg:#f8f7f1; --surface:#fffefa; --border:#e1e5dc; --border-hover:#8ba79d; --text-primary:#253d35; --text-secondary:#5d6d65; --text-muted:#728078; --accent:#225f4b; --radius-md:13px; --radius-lg:18px; }
+  body { background:radial-gradient(ellipse at 90% 0,#e8eee2 0,transparent 38%),var(--bg); line-height:1.7; }
+  button,input,a { -webkit-tap-highlight-color:transparent; }
+  button { font-family:inherit; }
+  button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible { outline:3px solid #458e75; outline-offset:4px; }
+  [hidden] { display:none!important; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .skip-link { position:fixed; left:12px; top:-80px; padding:10px 16px; border-radius:9px; background:var(--accent); color:white; z-index:100; }
+  .skip-link:focus { top:12px; }
+  .site-head { max-width:1120px; margin:auto; padding:24px 30px; display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid var(--border); }
+  .brand { display:flex; align-items:center; gap:11px; color:var(--text-primary); font-size:19px; font-weight:700; text-decoration:none; line-height:1.35; }
+  .brand-mark { width:43px; height:43px; display:grid; place-items:center; background:#e2ecdd; border-radius:14px 14px 14px 4px; font-size:23px; }
+  .brand small { display:block; margin-top:4px; font-size:10px; letter-spacing:.1em; font-weight:500; color:var(--text-secondary); }
+  .head-link { color:var(--accent); font-size:12px; text-decoration:none; border-bottom:1px solid #b4c8bd; padding-bottom:3px; white-space:nowrap; }
+  .container { max-width:1120px; padding:0 30px; }
+  .hero { display:grid; grid-template-columns:minmax(0,1fr) 270px; gap:44px; align-items:center; padding:52px 0 36px; }
+  .eyebrow { font-size:10px; font-weight:700; letter-spacing:.16em; color:#65816f; margin-bottom:12px; }
+  .hero h1 { font-size:clamp(29px,4.1vw,45px); font-weight:700; line-height:1.5; letter-spacing:.015em; }
+  .hero-copy { color:var(--text-secondary); font-size:13px; margin-top:18px; line-height:1.95; }
+  .hero-note { position:relative; padding:23px 24px 20px; border:1px solid #d2ddcd; border-radius:3px 25px 25px 25px; background:#edf1e7; color:var(--text-primary); text-decoration:none; transform:rotate(1deg); transition:transform .2s,background .2s; }
+  .hero-note:hover { transform:rotate(0); background:#e4ecdb; }
+  .hero-note .eyebrow { font-size:9px; margin-bottom:12px; }
+  .hero-note strong { display:block; font-size:19px; line-height:1.7; }
+  .hero-note > span:last-child { display:block; margin-top:14px; color:#5d7567; font-size:11px; line-height:1.8; }
+  .note-icon { position:absolute; right:20px; top:14px; font-size:22px; color:#577d63; }
+  .find-panel { padding:26px; background:var(--surface); border:1px solid var(--border); border-radius:22px; box-shadow:0 8px 30px #294e3b06; }
+  .panel-top { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:15px; }
+  .panel-top h2 { font-size:17px; }
+  .panel-top > span { font-size:11px; color:var(--text-muted); }
+  .search-row { position:relative; display:flex; align-items:center; gap:8px; margin-bottom:17px; }
+  .search-icon { position:absolute; left:16px; font-size:25px; line-height:1; color:#627c6b; }
+  #portal-search { width:100%; min-width:0; height:53px; padding:12px 16px 12px 45px; background:#f5f6f0; border:1px solid #dce2d6; border-radius:12px; font:inherit; font-size:14px; color:var(--text-primary); }
+  #portal-search::placeholder { color:#7a897e; }
+  .clear-search { flex-shrink:0; padding:11px 13px; border:1px solid var(--border); background:#fff; border-radius:10px; font-size:11px; color:var(--text-secondary); cursor:pointer; }
+  .issue-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+  .issue-btn { display:flex; align-items:center; gap:8px; border:1px solid #e1e7dc; border-radius:12px; min-height:52px; padding:10px; background:#fffefa; color:var(--text-primary); font-size:11px; font-weight:500; text-align:left; line-height:1.6; cursor:pointer; transition:background .15s,border-color .15s; }
+  .issue-btn > span:first-child { font-size:17px; }
+  .issue-arrow { margin-left:auto; color:#789282; font-size:13px; }
+  .issue-btn:hover { background:#f0f4eb; border-color:#aec1ac; }
+  .issue-btn[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:white; }
+  .issue-btn[aria-pressed="true"] .issue-arrow { color:#b6d3bc; }
+  .find-hint { margin-top:13px; font-size:11px; color:var(--text-muted); }
+  .practice-section { margin-top:38px; }
+  .section-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:17px; }
+  .section-heading .eyebrow { margin-bottom:4px; font-size:9px; }
+  .section-heading h2 { font-size:19px; line-height:1.6; }
+  .text-link { color:var(--accent); text-decoration:none; border-bottom:1px solid #b8c8ba; font-size:11px; padding:3px 0; }
+  .text-link:hover { border-color:var(--accent); }
+  .practice-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; }
+  .practice-card { position:relative; display:flex; flex-direction:column; min-width:0; padding:21px; border:1px solid var(--border); border-radius:17px; background:var(--surface); text-decoration:none; color:var(--text-primary); transition:transform .15s,border-color .15s; }
+  .practice-card:hover { transform:translateY(-3px); border-color:#8da78e; }
+  .stage-label { width:max-content; max-width:100%; font-size:10px; color:#426655; background:#e9f0e4; padding:3px 9px; border-radius:6px; margin-bottom:13px; }
+  .stage-now .stage-label { color:#735c2e; background:#f6edda; }
+  .stage-grow .stage-label { color:#4c6483; background:#eaf0f5; }
+  .practice-card h3 { font-size:16px; line-height:1.65; margin-bottom:7px; padding-right:10px; }
+  .practice-desc { font-size:12px; line-height:1.8; color:var(--text-secondary); margin-bottom:15px; }
+  .practice-meta { display:flex; flex-wrap:wrap; gap:5px; margin-top:auto; font-size:10px; color:var(--text-muted); }
+  .practice-meta > span { padding:2px 7px; background:#f3f5ee; border-radius:4px; }
+  .practice-action { display:flex; align-items:center; justify-content:space-between; color:var(--accent); font-size:11px; border-top:1px solid var(--border); padding-top:13px; margin-top:16px; }
+  .practice-action > span:last-child { font-size:17px; }
+  .catalog-fallback { padding:20px; border:1px dashed #becdba; border-radius:12px; font-size:12px; color:var(--text-secondary); }
+  .catalog-fallback a { color:var(--accent); }
+  .apps-section { margin-top:42px; border-top:1px solid var(--border); padding-top:30px; }
+  .result-count,.result-label { font-size:11px; color:var(--text-secondary); }
+  .result-label { margin:0 0 12px; }
+  .filter-bar { margin-bottom:22px; gap:7px; }
+  .filter-btn { padding:8px 14px; font-size:11px; min-height:37px; }
+  .filter-btn.active { background:var(--accent); border-color:var(--accent); }
+  .section-label { color:#607866; font-size:12px; font-weight:700; margin-top:25px; margin-bottom:10px; }
+  .grid { grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+  .card { padding:20px; }
+  .card-title { font-size:14px; line-height:1.65; }
+  .card-desc { font-size:11px; line-height:1.85; }
+  .card-top { align-items:center; gap:8px; }
+  .icon-wrap { border-radius:11px; }
+  .card-wip { opacity:.67; }
+  .more-results { display:inline-block; margin-top:18px; }
+  .empty-state { padding:40px 20px; text-align:center; border:1px dashed #c9d4c3; border-radius:18px; margin:25px 0; }
+  .empty-state > span { font-size:26px; }
+  .empty-state h2 { font-size:15px; margin-top:10px; }
+  .empty-state p { font-size:12px; color:var(--text-secondary); margin-top:7px; }
+  .empty-state button { margin-top:16px; background:var(--accent); color:white; border:0; padding:11px 19px; border-radius:10px; cursor:pointer; font-size:12px; }
+  footer { margin-top:42px; }
+  @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none!important; scroll-behavior:auto!important; } }
+  @media (max-width:850px) {
+    .hero { grid-template-columns:minmax(0,1fr) 235px; gap:24px; }
+    .hero-note { padding:20px; }
+    .issue-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .practice-card { padding:17px; }
+  }
+  @media (max-width:600px) {
+    .site-head { padding:18px 18px; }
+    .brand { font-size:16px; gap:8px; }
+    .brand-mark { width:37px; height:37px; font-size:20px; }
+    .head-link { font-size:10px; }
+    .container { padding:0 18px; }
+    .hero { display:block; padding:31px 0 25px; }
+    .hero h1 { font-size:31px; }
+    .hero-copy { font-size:12px; margin-top:14px; }
+    .hero-note { display:none; }
+    .find-panel { padding:18px 15px; border-radius:17px; }
+    .panel-top { display:block; margin-bottom:12px; }
+    .panel-top h2 { font-size:16px; }
+    .panel-top > span { display:block; margin-top:3px; }
+    .search-row { flex-wrap:wrap; }
+    .search-icon { top:14px; }
+    #portal-search { font-size:12px; height:50px; padding-left:38px; }
+    .search-icon { left:12px; }
+    .clear-search { padding:5px 0; border:0; background:none; color:var(--accent); }
+    .issue-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+    .issue-btn { padding:9px; font-size:10px; min-height:49px; gap:6px; }
+    .issue-btn:last-child { grid-column:1 / -1; }
+    .find-hint { font-size:10px; line-height:1.8; }
+    .section-heading { align-items:flex-start; gap:8px; flex-wrap:wrap; }
+    .section-heading h2 { font-size:17px; }
+    .section-heading .text-link { margin-top:5px; }
+    .practice-section { margin-top:27px; }
+    .practice-grid { grid-template-columns:1fr; gap:10px; }
+    .practice-card { padding:17px 18px; }
+    .practice-card h3 { font-size:16px; }
+    .practice-desc { font-size:12px; margin-bottom:12px; }
+    .stage-label { margin-bottom:8px; }
+    .practice-action { margin-top:12px; padding-top:10px; }
+    .grid { grid-template-columns:1fr; gap:10px; }
+    .card { padding:18px; }
+    .card-top { margin-bottom:8px; }
+    .card-desc { font-size:12px; }
+    .filter-btn { padding:7px 12px; font-size:11px; }
+    .wide-only { display:none; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">本文へ移動</a>
 
-<div class="header">
-  <h1>🏫 先生のためのアプリ集</h1>
-  <p>カテゴリを選んで、使いたいアプリを見つけてください</p>
-</div>
+<header class="site-head">
+  <a class="brand" href="./" aria-label="まなびたね 先生の実践ナビ ホーム"><span class="brand-mark" aria-hidden="true">🌱</span><span>まなびたね<small>先生の実践ナビ</small></span></a>
+  <a class="head-link" href="../activity-portal/?view=saved">マイ引き出し <span aria-hidden="true">↗</span></a>
+</header>
 
-<div class="container">
+<main class="container" id="main-content">
+  <section class="hero" aria-labelledby="hero-title">
+    <div>
+      <p class="eyebrow">FOR YOUR CLASSROOM</p>
+      <h1 id="hero-title">今の困りごとから、<br>次の一歩を。</h1>
+      <p class="hero-copy">教室で使える活動も、先生の声かけも、授業や校務のアプリも。<br class="wide-only">いま必要な手立てを見つけて、自分の引き出しへ。</p>
+    </div>
+    <a class="hero-note" href="../activity-portal/">
+      <span class="note-icon" aria-hidden="true">↗</span>
+      <p class="eyebrow">FIND → TRY → KEEP</p>
+      <strong>ひとつ選んで、<br>今日の教室で試そう。</strong>
+      <span>台本・手順・振り返りまでそろう<br>学級づくりの実践カードへ <span aria-hidden="true">→</span></span>
+    </a>
+  </section>
+
+  <section class="find-panel" aria-labelledby="find-title">
+    <div class="panel-top"><h2 id="find-title">何に困っていますか？</h2><span>場面や、やりたいことから探す</span></div>
+    <div class="search-row">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <label class="sr-only" for="portal-search">活動とアプリをまとめて検索</label>
+      <input id="portal-search" type="search" placeholder="例：静かに、給食、タイマー、九九" autocomplete="off">
+      <button id="clear-search" class="clear-search" type="button" hidden>条件をクリア</button>
+    </div>
+    <div class="issue-grid" role="group" aria-label="困りごとから探す">
+      <button type="button" class="issue-btn" data-issue="listen" aria-pressed="false"><span aria-hidden="true">👂</span><span>話を聞けない</span><span class="issue-arrow" aria-hidden="true">↗</span></button>
+      <button type="button" class="issue-btn" data-issue="switch" aria-pressed="false"><span aria-hidden="true">🔄</span><span>切り替えが遅い</span><span class="issue-arrow" aria-hidden="true">↗</span></button>
+      <button type="button" class="issue-btn" data-issue="routine" aria-pressed="false"><span aria-hidden="true">☀️</span><span>朝・給食・帰りの会</span><span class="issue-arrow" aria-hidden="true">↗</span></button>
+      <button type="button" class="issue-btn" data-issue="conflict" aria-pressed="false"><span aria-hidden="true">💬</span><span>言い争い・悪口</span><span class="issue-arrow" aria-hidden="true">↗</span></button>
+      <button type="button" class="issue-btn" data-issue="cooperate" aria-pressed="false"><span aria-hidden="true">🤝</span><span>協力してほしい</span><span class="issue-arrow" aria-hidden="true">↗</span></button>
+    </div>
+    <p class="find-hint" id="issue-description">まずは、今日の場面に近いものを一つ選んでみよう。</p>
+  </section>
+
+  <section class="practice-section" id="practice-section" aria-labelledby="practice-title">
+    <div class="section-heading"><div><p class="eyebrow">SMALL STEPS</p><h2 id="practice-title">教室で試せる、ひとつの手立て</h2></div><a id="practice-more" class="text-link" href="../activity-portal/">実践カードをすべて見る <span aria-hidden="true">→</span></a></div>
+    <div id="practice-recommendations" class="practice-grid"></div>
+    <p class="catalog-fallback" id="catalog-fallback" hidden>実践カードの一覧を読み込めませんでした。<a id="fallback-activity-link" href="../activity-portal/">活動集から探す →</a></p>
+    <div id="activity-results" hidden><p id="activity-result-label" class="result-label"></p><div id="activity-grid" class="practice-grid"></div><a id="activity-more" class="text-link more-results" href="../activity-portal/" hidden>残りの実践カードを活動集で見る →</a></div>
+  </section>
+
+  <section class="apps-section" aria-labelledby="apps-title">
+    <div class="section-heading"><div><p class="eyebrow">TOOLS FOR TEACHERS</p><h2 id="apps-title">授業と校務を支えるアプリ</h2></div><span id="app-result-count" class="result-count"></span></div>
 
   <!-- Filter -->
-  <div class="filter-bar">
+  <div class="filter-bar" role="group" aria-label="アプリと実践のカテゴリー">
     <button class="filter-btn active" data-filter="all">すべて</button>
     <button class="filter-btn" data-filter="homeroom">🐉 学級経営</button>
     <button class="filter-btn" data-filter="teacher">🌱 教師力向上</button>
@@ -304,6 +478,8 @@
     <button class="filter-btn" data-filter="admin">📋 校務</button>
     <button class="filter-btn" data-filter="event">🏫 学校行事</button>
   </div>
+
+  <p id="app-empty" class="catalog-fallback" hidden>この条件に合うアプリはありません。上の実践カードや、別のカテゴリーも試してみよう。</p>
 
   <!-- 学級経営 -->
   <div class="section-block" data-section="homeroom">
@@ -318,7 +494,7 @@
         <div class="card-desc">クラスみんなでクエストにちょうせんして、いっしょにキャラクターをそだてよう！</div>
         <div class="wip-note">いまは準備中です。公開までしばらくお待ちください</div>
       </div>
-      <a class="card cat-homeroom" data-cat="homeroom" href="https://manabitane.jp/grouping/" target="_blank">
+      <a class="card cat-homeroom" data-cat="homeroom" href="https://manabitane.jp/grouping/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">👥</div>
           <span class="tag tag-homeroom">学級経営</span>
@@ -326,7 +502,7 @@
         <div class="card-title">グルーピング</div>
         <div class="card-desc">名簿貼り付け・Excel読み込み対応。PDF出力まで完結</div>
       </a>
-      <a class="card cat-homeroom" data-cat="homeroom" href="https://manabitane.jp/Sekigae/" target="_blank">
+      <a class="card cat-homeroom" data-cat="homeroom" href="https://manabitane.jp/Sekigae/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">💺</div>
           <span class="tag tag-homeroom">学級経営</span>
@@ -334,13 +510,13 @@
         <div class="card-title">席替えアプリ</div>
         <div class="card-desc">NGペア・固定席・エリア指定・シークレットモード搭載。A4印刷対応</div>
       </a>
-      <a class="card cat-homeroom" data-cat="homeroom" href="https://manabitane.jp/activity-portal/" target="_blank">
+      <a class="card cat-homeroom" data-cat="homeroom" href="https://manabitane.jp/activity-portal/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🎉</div>
           <span class="tag tag-homeroom">学級経営</span>
         </div>
-        <div class="card-title">学級づくりアクティビティ集</div>
-        <div class="card-desc">隙間時間に学級の絆レベルを上げられる</div>
+        <div class="card-title">学級づくり実践ナビ</div>
+        <div class="card-desc">切り替え活動・指導のコツ・PA・SGE・SST。困りごとから声かけと手順まで</div>
       </a>
     </div>
   </div>
@@ -349,7 +525,7 @@
   <div class="section-block" data-section="teacher">
     <div class="section-label">教師力向上</div>
     <div class="grid">
-      <a class="card cat-teacher" data-cat="teacher" href="https://manabitane.jp/teacherchi/" target="_blank">
+      <a class="card cat-teacher" data-cat="teacher" href="https://manabitane.jp/teacherchi/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🌱</div>
           <span class="tag tag-teacher">教師力向上</span>
@@ -365,7 +541,7 @@
     <div class="section-label">タイマー</div>
     <div class="grid">
       <div class="card cat-timer card-expandable" data-cat="timer">
-        <a class="card-link" href="https://manabitane.jp/meniyasashii-timer/" target="_blank">
+        <a class="card-link" href="https://manabitane.jp/meniyasashii-timer/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">⏱</div>
             <span class="tag tag-timer">タイマー</span>
@@ -382,7 +558,7 @@
           </ul>
         </details>
       </div>
-      <a class="card cat-timer" data-cat="timer" href="https://manabitane.jp/hachiware_timer/" target="_blank">
+      <a class="card cat-timer" data-cat="timer" href="https://manabitane.jp/hachiware_timer/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🐱</div>
           <span class="tag tag-timer">タイマー</span>
@@ -390,7 +566,7 @@
         <div class="card-title">はちわれタイマー</div>
         <div class="card-desc">数字ボタンで直感操作。かわいいはちわれが動く</div>
       </a>
-      <a class="card cat-timer" data-cat="timer" href="https://manabitane.jp/UFO_Timer/" target="_blank">
+      <a class="card cat-timer" data-cat="timer" href="https://manabitane.jp/UFO_Timer/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">👽</div>
           <span class="tag tag-timer">タイマー</span>
@@ -405,7 +581,7 @@
   <div class="section-block" data-section="lottery">
     <div class="section-label">抽選・ビンゴ</div>
     <div class="grid">
-      <a class="card cat-lottery" data-cat="lottery" href="https://manabitane.jp/gorilla_draw/" target="_blank">
+      <a class="card cat-lottery" data-cat="lottery" href="https://manabitane.jp/gorilla_draw/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🦍</div>
           <span class="tag tag-lottery">抽選</span>
@@ -413,7 +589,7 @@
         <div class="card-title">ゴリラドロー</div>
         <div class="card-desc">母数を一発選択。派手な演出で結果発表。履歴表示あり</div>
       </a>
-      <a class="card cat-lottery" data-cat="lottery" href="https://manabitane.jp/mgical_cat_draw/" target="_blank">
+      <a class="card cat-lottery" data-cat="lottery" href="https://manabitane.jp/mgical_cat_draw/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🪄</div>
           <span class="tag tag-lottery">抽選</span>
@@ -421,7 +597,7 @@
         <div class="card-title">マジカルキャットドロー</div>
         <div class="card-desc">しろねこが占う本格抽選アプリ</div>
       </a>
-      <a class="card cat-lottery" data-cat="lottery" href="https://manabitane.jp/UFO_draw/" target="_blank">
+      <a class="card cat-lottery" data-cat="lottery" href="https://manabitane.jp/UFO_draw/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">👽</div>
           <span class="tag tag-lottery">抽選</span>
@@ -429,7 +605,7 @@
         <div class="card-title">UFOドロー</div>
         <div class="card-desc">宇宙人が抽選する個性派アプリ</div>
       </a>
-      <a class="card cat-lottery" data-cat="lottery" href="https://manabitane.jp/Bingo/" target="_blank">
+      <a class="card cat-lottery" data-cat="lottery" href="https://manabitane.jp/Bingo/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🎯</div>
           <span class="tag tag-lottery">抽選</span>
@@ -448,7 +624,7 @@
     <div class="sub-section">
       <div class="sub-section-label">国語</div>
       <div class="grid">
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/yoyaku-navi/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/yoyaku-navi/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">📖</div>
             <span class="tag tag-class">国語</span>
@@ -463,7 +639,7 @@
     <div class="sub-section">
       <div class="sub-section-label">算数</div>
       <div class="grid">
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/math-planet/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/math-planet/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">⭐</div>
             <span class="tag tag-class">算数</span>
@@ -478,7 +654,7 @@
     <div class="sub-section">
       <div class="sub-section-label">社会</div>
       <div class="grid">
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/todofuken/docs/index.html?v=latest" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/todofuken/docs/index.html?v=latest" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🗾</div>
             <span class="tag tag-class">社会</span>
@@ -486,7 +662,7 @@
           <div class="card-title">パズルで覚える！都道府県</div>
           <div class="card-desc">パズルをしながら、都道府県の位置や県庁所在地までばっちり暗記</div>
         </a>
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/chizukigo/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/chizukigo/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🗺️</div>
             <span class="tag tag-class">社会</span>
@@ -494,7 +670,7 @@
           <div class="card-title">地図記号クイズ</div>
           <div class="card-desc">苦手な子が多い地図記号もクイズでばっちり100点満点💯</div>
         </a>
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/shakai-journey/shakai-quest/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/shakai-journey/shakai-quest/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">⛩️</div>
             <span class="tag tag-class">社会</span>
@@ -502,7 +678,7 @@
           <div class="card-title">時空社会御朱印帳</div>
           <div class="card-desc">日本各地や時空を旅しながら"御朱印"を集めよう！</div>
         </a>
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/rekishi-quiz/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/rekishi-quiz/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🏯</div>
             <span class="tag tag-class">社会</span>
@@ -517,7 +693,7 @@
     <div class="sub-section">
       <div class="sub-section-label">理科</div>
       <div class="grid">
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/rika-navi/index.html" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/rika-navi/index.html" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🔬</div>
             <span class="tag tag-class">理科</span>
@@ -525,7 +701,7 @@
           <div class="card-title">理科問題解決ナビ</div>
           <div class="card-desc">理科の問題解決の流れをナビゲート</div>
         </a>
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/detective-science/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/detective-science/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🔍</div>
             <span class="tag tag-class">理科</span>
@@ -533,7 +709,7 @@
           <div class="card-title">理科捜査局</div>
           <div class="card-desc">科学的にドキドキハラハラ謎解きしながら自然に考察力をアップ！</div>
         </a>
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/science-RPG/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/science-RPG/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">⚗️</div>
             <span class="tag tag-class">理科</span>
@@ -548,7 +724,7 @@
     <div class="sub-section">
       <div class="sub-section-label">体育</div>
       <div class="grid">
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/taiiku-navi/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/taiiku-navi/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🤸</div>
             <span class="tag tag-class">体育</span>
@@ -563,7 +739,7 @@
     <div class="sub-section">
       <div class="sub-section-label">音楽</div>
       <div class="grid">
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/recorder-quest/dist/index.html" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/recorder-quest/dist/index.html" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🎵</div>
             <span class="tag tag-class">音楽</span>
@@ -578,7 +754,7 @@
     <div class="sub-section">
       <div class="sub-section-label">情報</div>
       <div class="grid">
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/graph-no-tane/dist/index.html" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/graph-no-tane/dist/index.html" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">📈</div>
             <span class="tag tag-class">情報</span>
@@ -586,7 +762,7 @@
           <div class="card-title">グラフナビゲーター（グラフのたね）</div>
           <div class="card-desc">グラフの読み方・作り方をナビゲート</div>
         </a>
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/info-moral-simulator/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/info-moral-simulator/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">📱</div>
             <span class="tag tag-class">情報</span>
@@ -601,7 +777,7 @@
     <div class="sub-section">
       <div class="sub-section-label">タイピング</div>
       <div class="grid">
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/ninda-do/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/ninda-do/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🥷</div>
             <span class="tag tag-class">タイピング</span>
@@ -616,7 +792,7 @@
     <div class="sub-section">
       <div class="sub-section-label">道徳・全般</div>
       <div class="grid">
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/cocoro_meter/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/cocoro_meter/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">❤️</div>
             <span class="tag tag-class">道徳</span>
@@ -624,7 +800,7 @@
           <div class="card-title">道徳心情メーター</div>
           <div class="card-desc">集計＆マッピング。ミライシードにない機能。出席番号で送信</div>
         </a>
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/hidden_hand/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/hidden_hand/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🙋</div>
             <span class="tag tag-class">全般</span>
@@ -632,7 +808,7 @@
           <div class="card-title">「分からない」隠し挙手</div>
           <div class="card-desc">端末から先生だけに「分からない」を送信。つまずきポイントを早期発見</div>
         </a>
-        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/thinking_board/" target="_blank">
+        <a class="card cat-class" data-cat="class" href="https://manabitane.jp/thinking_board/" target="_blank" rel="noopener noreferrer">
           <div class="card-top">
             <div class="icon-wrap">🧠</div>
             <span class="tag tag-class">全般</span>
@@ -648,7 +824,7 @@
   <div class="section-block" data-section="event">
     <div class="section-label">学校行事</div>
     <div class="grid">
-      <a class="card cat-event" data-cat="event" href="https://manabitane.jp/undokai-scoreboard/" target="_blank">
+      <a class="card cat-event" data-cat="event" href="https://manabitane.jp/undokai-scoreboard/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🏆</div>
           <span class="tag tag-event">学校行事</span>
@@ -656,7 +832,7 @@
         <div class="card-title">運動会スコアボード</div>
         <div class="card-desc">組設定・徒競走を得点に含めるか・種目ごとの得点設定も自由自在</div>
       </a>
-      <a class="card cat-event" data-cat="event" href="https://manabitane.jp/undokai-tokyoso/" target="_blank">
+      <a class="card cat-event" data-cat="event" href="https://manabitane.jp/undokai-tokyoso/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🏃</div>
           <span class="tag tag-event">学校行事</span>
@@ -664,7 +840,7 @@
         <div class="card-title">運動会徒競走順メイカー</div>
         <div class="card-desc">徒競走の走る順番を背の順・出席番号順・タイム順などで一発編成</div>
       </a>
-      <a class="card cat-event" data-cat="event" href="https://manabitane.jp/kougai_check/" target="_blank">
+      <a class="card cat-event" data-cat="event" href="https://manabitane.jp/kougai_check/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">📍</div>
           <span class="tag tag-event">学校行事</span>
@@ -672,7 +848,7 @@
         <div class="card-title">チェックポイント管理</div>
         <div class="card-desc">引率教員間でCP通過をリアルタイム一覧管理</div>
       </a>
-      <a class="card cat-event" data-cat="event" href="https://manabitane.jp/shugakuji/" target="_blank">
+      <a class="card cat-event" data-cat="event" href="https://manabitane.jp/shugakuji/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">✅</div>
           <span class="tag tag-event">学校行事</span>
@@ -687,7 +863,7 @@
   <div class="section-block" data-section="admin">
     <div class="section-label">校務・ツール</div>
     <div class="grid">
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/ichiniti-hurikaeri/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/ichiniti-hurikaeri/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🗓️</div>
           <span class="tag tag-admin">校務</span>
@@ -695,7 +871,7 @@
         <div class="card-title">補欠計画＆1日振り返りシートメイカー</div>
         <div class="card-desc">1日出張などで不在にするとき、補欠計画と同時に、児童が1日を生産的に過ごすための「めあて設定」と「振り返り」シートを一緒に作成</div>
       </a>
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/gakkyu-shindan/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/gakkyu-shindan/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">📊</div>
           <span class="tag tag-admin">校務</span>
@@ -703,7 +879,7 @@
         <div class="card-title">QU学級診断</div>
         <div class="card-desc">「印刷→全体→ヘルプサイン」で出力したPDFを読み込み。学級経営のポイントや要指導児童、効果的なSGE・SSTを提案。AIへのプロンプト作成も実装</div>
       </a>
-      <a class="card cat-admin" data-cat="admin" href="https://docx2pdf-c04c.onrender.com/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://docx2pdf-c04c.onrender.com/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">📄</div>
           <span class="tag tag-admin">校務</span>
@@ -711,7 +887,7 @@
         <div class="card-title">DOCX → PDF 変換</div>
         <div class="card-desc">WordファイルをPDFに高品質変換。ドラッグ＆ドロップで複数ファイル同時対応</div>
       </a>
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/talk-shoken/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/talk-shoken/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🎤</div>
           <span class="tag tag-admin">校務</span>
@@ -719,7 +895,7 @@
         <div class="card-title">しゃべって所見</div>
         <div class="card-desc">所見を「書く」時代は終わり！しゃべってメモ、AIで推敲、Excel出力で超時短</div>
       </a>
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/desk-nameplate-maker/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/desk-nameplate-maker/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🪧</div>
           <span class="tag tag-admin">校務</span>
@@ -727,7 +903,7 @@
         <div class="card-title">机ネームプレートメイカー</div>
         <div class="card-desc">A3縦6名分を一気にPDF出力。名簿読み込み・ふりがな対応</div>
       </a>
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/masume/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/masume/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">📝</div>
           <span class="tag tag-admin">校務</span>
@@ -753,7 +929,7 @@
         <div class="card-desc">上下ボタンでローテーション。シンプルに使いたい人向け</div>
         <div class="wip-note">いまは準備中です。公開までしばらくお待ちください</div>
       </div>
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/kirinuki/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/kirinuki/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">✂️</div>
           <span class="tag tag-admin">校務</span>
@@ -761,7 +937,7 @@
         <div class="card-title">顔写真切り抜き 4:3</div>
         <div class="card-desc">一括切り抜き・保存。ブラウザ内完結で流出の心配なし</div>
       </a>
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/shukusho/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/shukusho/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🖼️</div>
           <span class="tag tag-admin">校務</span>
@@ -769,7 +945,7 @@
         <div class="card-title">画像縮小専門</div>
         <div class="card-desc">割合を設定して一括リサイズ・保存</div>
       </a>
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/PDF_renketu/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/PDF_renketu/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">📎</div>
           <span class="tag tag-admin">校務</span>
@@ -777,7 +953,7 @@
         <div class="card-title">PDF連結くん</div>
         <div class="card-desc">複数PDFをまとめて結合</div>
       </a>
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/thumb_print/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/thumb_print/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🗂️</div>
           <span class="tag tag-admin">校務</span>
@@ -794,7 +970,7 @@
         <div class="card-desc">学年のお金の管理をスプレッドシートで一元化</div>
         <div class="wip-note">いまは準備中です。公開までしばらくお待ちください</div>
       </div>
-      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/ruby-transparent-generator/" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://manabitane.jp/ruby-transparent-generator/" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">🎨</div>
           <span class="tag tag-admin">校務</span>
@@ -802,7 +978,7 @@
         <div class="card-title">透過文字PNGジェネレーター</div>
         <div class="card-desc">背景透過を簡単に作れる</div>
       </a>
-      <a class="card cat-admin" data-cat="admin" href="https://github.com/Kou-no1/pdf2png" target="_blank">
+      <a class="card cat-admin" data-cat="admin" href="https://github.com/Kou-no1/pdf2png" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <div class="icon-wrap">📤</div>
           <span class="tag tag-admin">校務</span>
@@ -813,39 +989,155 @@
     </div>
   </div>
 
+  </section>
+  <div class="empty-state" id="empty-state" hidden><span aria-hidden="true">🌱</span><h2>条件に合うものが見つかりませんでした</h2><p>言葉を短くするか、条件をクリアして探してみよう。</p><button type="button" id="empty-clear">条件をクリア</button></div>
+  <p id="search-status" class="sr-only" role="status" aria-live="polite"></p>
   <footer style="border-top: 0.5px solid #e0e0e0; padding: 1.5rem 0 1rem; text-align: center;">
     <p style="font-size: 15px; color: #888; margin: 0 0 4px;">「あったらいいのに」を、作ってる。</p>
     <p style="font-size: 12px; color: #aaa; margin: 0;">© 2026 まなびたね All rights reserved.</p>
   </footer>
 
-</div>
+</main>
 
+<script src="../activity-portal/catalog.js"></script>
+<script src="../activity-portal/core.js"></script>
 <script>
-  const btns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.card');
-  const sections = document.querySelectorAll('.section-block');
+(function () {
+  'use strict';
+  const catalog = window.MANABITANE_CATALOG || {};
+  const stages = [
+    { id: 'now', label: '今、その場で整える', short: '今すぐ', description: '短い活動や合図で、次の一歩へ。' },
+    { id: 'routine', label: '毎日の手順を育てる', short: '毎日', description: '声かけと見通しを、日々の習慣に。' },
+    { id: 'grow', label: '力と関係をじっくり育てる', short: 'じっくり', description: 'SST・SGE・PAを日常につなげる。' }
+  ];
+  const issues = {
+    listen: { label: '話を聞けない', description: 'まずは一つの行動を伝える。合図や聞く練習から選べます。', keywords: '話 聞く 聞き方 静か しずか ざわざわ ざわつく 私語 おしゃべり 集中 注意 声 指示' },
+    switch: { label: '切り替えが遅い', description: '休み時間の後や活動の間に。見通しと始めの一歩をつくります。', keywords: '切り替え 切替 きりかえ 休み時間 授業開始 準備 時間 移動 片付け タイマー' },
+    routine: { label: '朝・給食・帰りの会', description: '朝の会、給食、帰りの会。待ち時間と毎日の手順を整えます。', keywords: '朝の会 朝会 給食 配膳 食事 帰りの会 帰り支度 下校 ルーティン 手順 生活 待つ 待ち時間 静か 落ち着く' },
+    conflict: { label: '言い争い・悪口', description: '落ち着いた場面で、気持ちの伝え方や頼み方を練習します。', keywords: 'けんか 喧嘩 悪口 トラブル 争い 怒り イライラ もめる 断る 謝る 気持ち 関係' },
+    cooperate: { label: '協力してほしい', description: '相手を知り、声をかけ、一緒に取り組む経験をつくります。', keywords: '協力 班 グループ 仲間 関係づくり 友達 友だち つながり 学級づくり 話し合い チーム' }
+  };
+  const categories = { all: 'すべて', homeroom: '学級経営', teacher: '教師力向上', timer: 'タイマー', lottery: '抽選', class: '授業', admin: '校務', event: '学校行事' };
+  const queryInput = document.getElementById('portal-search');
+  const cards = Array.from(document.querySelectorAll('.section-block .card'));
+  const sections = Array.from(document.querySelectorAll('.section-block'));
+  const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
+  const issueButtons = Array.from(document.querySelectorAll('.issue-btn'));
+  const activities = (Array.isArray(catalog.activities) ? catalog.activities : []).filter(a => a && typeof a.id === 'string' && typeof a.title === 'string' && stages.some(s => s.id === a.stage));
+  const queryState = new URLSearchParams(location.search);
+  let selectedIssue = Object.hasOwn(issues, queryState.get('issue')) ? queryState.get('issue') : '';
+  let selectedCategory = Object.hasOwn(categories, queryState.get('cat')) ? queryState.get('cat') : 'all';
+  queryInput.value = queryState.get('q') || '';
 
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  function normalize(value) { return String(value || '').normalize('NFKC').toLocaleLowerCase('ja'); }
+  function flatten(value) { return Array.isArray(value) ? value.map(flatten).join(' ') : (value && typeof value === 'object' ? Object.values(value).map(flatten).join(' ') : String(value || '')); }
+  function issueText(list) { return (Array.isArray(list) ? list : []).map(id => issues[id] ? issues[id].label + ' ' + issues[id].keywords : '').join(' '); }
+  function queryMatches(text) { const haystack = normalize(text); return normalize(queryInput.value).trim().split(/\s+/).filter(Boolean).every(token => haystack.includes(token)); }
+  function activityCategory(a) { return a.category === 'TIP' ? 'teacher' : 'homeroom'; }
+  function activityMatches(a) {
+    if (window.SupportCore) return (selectedCategory === 'all' || selectedCategory === activityCategory(a)) && window.SupportCore.filter([a], {issue:selectedIssue,q:queryInput.value}, catalog).length > 0;
+    return (selectedCategory === 'all' || selectedCategory === activityCategory(a)) && (!selectedIssue || (a.issues || []).includes(selectedIssue)) && queryMatches(flatten(a) + ' ' + issueText(a.issues) + ' ' + categories[activityCategory(a)]);
+  }
+  function destination(values) { const params = new URLSearchParams(); Object.entries(values).forEach(([key, value]) => { if (value) params.set(key, value); }); return '../activity-portal/' + (params.size ? '?' + params.toString() : ''); }
+  function element(tag, className, text) { const node = document.createElement(tag); if (className) node.className = className; if (text !== undefined) node.textContent = text; return node; }
+  function durationLabel(minutes) { if (!Number.isFinite(Number(minutes))) return ''; const n = Number(minutes); return n < 1 ? Math.round(n * 60) + '秒' : n + '分'; }
 
-      const filter = btn.dataset.filter;
-
-      cards.forEach(card => {
-        if (filter === 'all' || card.dataset.cat === filter) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-
-      sections.forEach(sec => {
-        const visibleCards = sec.querySelectorAll('.card:not(.hidden)');
-        sec.classList.toggle('hidden', visibleCards.length === 0);
-      });
-    });
+  const appInfo = cards.map(card => {
+    const title = card.querySelector('.card-title')?.textContent || '';
+    const link = card.matches('a') ? card : card.querySelector('a');
+    const href = link?.getAttribute('href') || '';
+    const related = [];
+    let keywords = '';
+    if (card.dataset.cat === 'timer') { related.push('switch', 'routine'); keywords += ' 残り時間 見通し 時間管理'; }
+    if (/grouping|Sekigae/.test(href)) { related.push('cooperate'); keywords += ' 席 座席 名簿 班 分け グループ分け'; }
+    if (/activity-portal/.test(href)) { related.push('listen', 'switch', 'routine', 'conflict', 'cooperate'); keywords += ' SST SGE PA アクティビティ 手立て'; }
+    if (/teacherchi/.test(href)) { related.push('listen', 'switch', 'routine'); keywords += ' 初任者 振り返り ふりかえり ミッション 指導'; }
+    if (/gakkyu-shindan/.test(href)) { related.push('conflict', 'cooperate', 'routine'); keywords += ' Q-U QU 学級診断 関係'; }
+    if (/ichiniti-hurikaeri/.test(href)) { related.push('routine'); keywords += ' 一日 ふりかえり 補欠 不在 出張'; }
+    if (/thinking_board/.test(href)) { related.push('cooperate'); keywords += ' 思考 話し合い 共有'; }
+    if (/math-planet/.test(href)) keywords += ' 計算 九九 かけ算 足し算 引き算 算数';
+    if (/talk-shoken/.test(href)) keywords += ' 所見 成績 評価 音声';
+    return { card, related, text: card.textContent + ' ' + keywords + ' ' + issueText(related) + ' ' + (categories[card.dataset.cat] || '') };
   });
+
+  function practiceCard(act, stage) {
+    const node = element('a', 'practice-card stage-' + stage.id);
+    node.href = destination({ id: act.id });
+    node.append(element('span', 'stage-label', stage.label), element('h3', '', act.title), element('p', 'practice-desc', act.catchphrase || stage.description));
+    const meta = element('div', 'practice-meta');
+    const labels = [durationLabel(act.duration), ...(Array.isArray(act.grades) ? act.grades : [])];
+    labels.filter(Boolean).forEach(label => meta.append(element('span', '', label)));
+    if (act.category) meta.append(element('span', '', ({ CALM: '切り替え活動', TIP: '指導のコツ' }[act.category] || act.category)));
+    const action = element('div', 'practice-action');
+    action.append(element('span', '', '台本・手順を見て実践する'), element('span', '', '→'));
+    node.append(meta, action);
+    return node;
+  }
+
+  function renderActivities(matches) {
+    const section = document.getElementById('practice-section');
+    const recommendations = document.getElementById('practice-recommendations');
+    const resultArea = document.getElementById('activity-results');
+    const resultGrid = document.getElementById('activity-grid');
+    const fallback = document.getElementById('catalog-fallback');
+    const hasQuery = Boolean(queryInput.value.trim());
+    recommendations.replaceChildren(); resultGrid.replaceChildren();
+    const canShow = selectedCategory === 'all' || selectedCategory === 'homeroom' || selectedCategory === 'teacher';
+    section.hidden = !canShow || (activities.length > 0 && matches.length === 0);
+    fallback.hidden = activities.length > 0 || !canShow;
+    document.getElementById('fallback-activity-link').href = destination({ issue: selectedIssue, q: queryInput.value.trim() });
+    document.getElementById('practice-more').href = destination({ issue: selectedIssue, q: queryInput.value.trim() });
+    document.getElementById('practice-title').textContent = hasQuery ? '見つかった実践カード' : (selectedIssue ? '「' + issues[selectedIssue].label + '」の手立て' : '教室で試せる、ひとつの手立て');
+    if (hasQuery) {
+      recommendations.hidden = true; resultArea.hidden = false;
+      document.getElementById('activity-result-label').textContent = matches.length + '件の実践カード';
+      matches.slice(0, 12).forEach(a => resultGrid.append(practiceCard(a, stages.find(stage => stage.id === a.stage))));
+      const more = document.getElementById('activity-more'); more.hidden = matches.length <= 12;
+      more.href = destination({ issue: selectedIssue, q: queryInput.value.trim() });
+    } else {
+      recommendations.hidden = false; resultArea.hidden = true;
+      stages.forEach(stage => {
+        // PA・SGEは、今すぐ落ち着くための活動として推薦しない。
+        const chosen = matches.find(a => a.noviceReady !== false && a.stage === stage.id && (stage.id !== 'now' || (a.category !== 'PA' && a.category !== 'SGE')));
+        if (chosen) recommendations.append(practiceCard(chosen, stage));
+      });
+    }
+  }
+
+  function render() {
+    const matches = activities.filter(activityMatches);
+    let appCount = 0;
+    appInfo.forEach(({ card, related, text }) => {
+      const visible = (selectedCategory === 'all' || card.dataset.cat === selectedCategory) && (!selectedIssue || related.includes(selectedIssue)) && queryMatches(text);
+      card.hidden = !visible;
+      if (visible) appCount++;
+    });
+    document.querySelectorAll('.sub-section').forEach(section => { section.hidden = !Array.from(section.querySelectorAll('.card')).some(card => !card.hidden); });
+    sections.forEach(section => { section.hidden = !Array.from(section.querySelectorAll('.card')).some(card => !card.hidden); });
+    filterButtons.forEach(button => { const active = button.dataset.filter === selectedCategory; button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active)); });
+    issueButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.issue === selectedIssue)));
+    document.getElementById('issue-description').textContent = selectedIssue ? issues[selectedIssue].description : 'まずは、今日の場面に近いものを一つ選んでみよう。';
+    document.getElementById('app-empty').hidden = appCount > 0 || matches.length === 0;
+    document.getElementById('app-result-count').textContent = appCount + '件' + (selectedIssue || queryInput.value.trim() || selectedCategory !== 'all' ? 'のアプリ' : 'のアプリ・準備中ツール');
+    document.getElementById('clear-search').hidden = !(queryInput.value.trim() || selectedIssue || selectedCategory !== 'all');
+    document.getElementById('empty-state').hidden = appCount > 0 || matches.length > 0 || (!activities.length && selectedIssue);
+    document.getElementById('search-status').textContent = '実践カード ' + matches.length + '件、アプリ ' + appCount + '件が見つかりました。';
+    renderActivities(matches);
+    const url = new URL(location.href);
+    ['q', 'issue', 'cat'].forEach(key => url.searchParams.delete(key));
+    if (queryInput.value.trim()) url.searchParams.set('q', queryInput.value.trim());
+    if (selectedIssue) url.searchParams.set('issue', selectedIssue);
+    if (selectedCategory !== 'all') url.searchParams.set('cat', selectedCategory);
+    try { history.replaceState(null, '', url); } catch (_) { /* file://でも検索自体は使える */ }
+  }
+  function clear() { queryInput.value = ''; selectedIssue = ''; selectedCategory = 'all'; render(); queryInput.focus(); }
+  queryInput.addEventListener('input', render);
+  filterButtons.forEach(button => button.addEventListener('click', () => { selectedCategory = button.dataset.filter; render(); }));
+  issueButtons.forEach(button => button.addEventListener('click', () => { selectedIssue = selectedIssue === button.dataset.issue ? '' : button.dataset.issue; selectedCategory = 'all'; render(); }));
+  document.getElementById('clear-search').addEventListener('click', clear);
+  document.getElementById('empty-clear').addEventListener('click', clear);
+  render();
+})();
 </script>
 
 </body>
